@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.dev.celulaspaz.fragments.DashDetail;
+import com.dev.celulaspaz.fragments.FragmentRecompensas;
 import com.dev.celulaspaz.fragments.NoticiasFragment;
 import com.dev.celulaspaz.fragments.Perfil;
 import com.dev.celulaspaz.fragments.Notificaciones;
@@ -36,17 +36,17 @@ public class MainActivity extends AppCompatActivity {
 
                     switch (id)
                     {
-                        case R.id.navigation_home:
+                        case R.id.navigation_noticias:
                             fragment=new NoticiasFragment();
 
                             break;
 
-                        case R.id.navigation_dashboard:
-                            fragment=new DashDetail();
+                        case R.id.navigation_descubre:
+                            fragment=new FragmentRecompensas();
 
                             break;
 
-                        case R.id.navigation_notifications:
+                        case R.id.navigation_hacer:
                             fragment=new Notificaciones();
 
                             break;
