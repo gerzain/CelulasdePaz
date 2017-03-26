@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dev.celulaspaz.R;
 import com.dev.celulaspaz.adapters.RecompensaAdapter;
@@ -102,8 +103,10 @@ public class FragmentRecompensas extends Fragment implements OnClickRecompensa
                 }
 
                 @Override
-                public void onFailure(Call<List<Recompensa>> call, Throwable t) {
-                    Snackbar.make(getActivity().findViewById(R.id.vista_recompensa), t.getMessage(), Snackbar.LENGTH_LONG).show();
+                public void onFailure(Call<List<Recompensa>> call, Throwable t)
+                {
+                   // Snackbar.make(getActivity().findViewById(R.id.vista_recompensa), t.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -114,6 +117,6 @@ public class FragmentRecompensas extends Fragment implements OnClickRecompensa
     @Override
     public void onItemClick(Recompensa recompensa)
     {
-        Snackbar.make(getActivity().findViewById(R.id.vista_recompensa), "ClickRecompensa", Snackbar.LENGTH_SHORT).show();
+       // Snackbar.make(getActivity().findViewById(R.id.vista_recompensa), "ClickRecompensa", Snackbar.LENGTH_SHORT).show();
     }
 }

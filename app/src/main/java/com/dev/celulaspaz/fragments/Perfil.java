@@ -92,7 +92,7 @@ public class Perfil extends Fragment
 
         switch (id)
         {
-            case R.id.profile:
+            case R.id.action_profile:
                 return  true;
         }
         return  false;

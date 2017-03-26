@@ -28,15 +28,15 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
+            android:label="@string/inicio"
+            android:roundIcon="@drawable/ic_account_box_black_24dp"
             android:theme="@style/Principal" />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <activity android:name=".fragments.NoticiasFragment" android:parentActivityName=".activities.MainActivity"
-            android:theme="@style/Principal">
 
-        </activity>
+
     </application>
 
 </manifest>

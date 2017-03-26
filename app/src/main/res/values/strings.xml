@@ -9,4 +9,5 @@
     <string name="nombre">nombre</string>
     <string name="recompensa">recompensa</string>
     <string name="des_recompensa">rescompensa_des</string>
+    <string name="inicio">Inicio</string>
 </resources>

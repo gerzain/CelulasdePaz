@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.dev.celulaspaz.R;
 import com.dev.celulaspaz.model.Noticia;
+import com.dev.celulaspaz.util.OnClickNoticia;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -28,11 +29,13 @@ public class NoticiaAdapter  extends RecyclerView.Adapter<NoticiaAdapter.ViewHol
 
     private List<Noticia> noticias;
     private Context context;
+    private OnClickNoticia onClickItem;
 
-    public NoticiaAdapter( Context context)
+    public NoticiaAdapter( Context context,OnClickNoticia onClickNoticia)
     {
         this.noticias = new ArrayList<>();
         this.context = context;
+        this.onClickItem=onClickNoticia;
     }
     private Context getContext()
     {
@@ -56,6 +59,7 @@ public class NoticiaAdapter  extends RecyclerView.Adapter<NoticiaAdapter.ViewHol
         Picasso.with(holder.itemView.getContext())
                 .load(noticia.getImagen())
                 .into(holder.img_noticia);
+        holder.setOnItemClickListener(noticia,onClickItem);
     }
     public void setDataset(List<Noticia> dataset)
     {
@@ -86,6 +90,15 @@ public class NoticiaAdapter  extends RecyclerView.Adapter<NoticiaAdapter.ViewHol
             super(itemView);
             ButterKnife.bind(this,itemView);
 
+        }
+        public void setOnItemClickListener(final Noticia n, final OnClickNoticia onClickNoticia)
+        {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onClickNoticia.onItemClick(n);
+                }
+            });
         }
     }
 

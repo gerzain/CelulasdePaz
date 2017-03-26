@@ -1,5 +1,8 @@
 package com.dev.celulaspaz.fragments;
 
+import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -12,11 +15,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dev.celulaspaz.R;
 import com.dev.celulaspaz.adapters.NoticiaAdapter;
 import com.dev.celulaspaz.model.Noticia;
 import com.dev.celulaspaz.service.ApiNoticia;
+import com.dev.celulaspaz.util.OnClickNoticia;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -29,12 +34,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NoticiasFragment extends Fragment
+public class NoticiasFragment extends Fragment implements OnClickNoticia
 {
     private List<Noticia> noticias;
     private NoticiaAdapter adapter;
     private  RecyclerView recyclerView;
     private String TAG=NoticiasFragment.class.getSimpleName();
+    private ProgressDialog progressDialog;
 
     public NoticiasFragment()
     {
@@ -50,24 +56,36 @@ public class NoticiasFragment extends Fragment
         recyclerView.setHasFixedSize(true);
         noticias=new ArrayList<>(0);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter=new NoticiaAdapter(getContext());
+        adapter=new NoticiaAdapter(getContext(),this);
         recyclerView.setAdapter(adapter);
         new ObtenerDatos().execute();
         return  view;
 
     }
+
+    @Override
+    public void onItemClick(Noticia noticia) {
+       // Snackbar.make(getActivity().findViewById(R.id.frm_noticia),"ClickNoticia",Snackbar.LENGTH_LONG).show();
+        Toast.makeText(getContext(),"Clicl",Toast.LENGTH_SHORT).show();
+    }
+
     private   class ObtenerDatos extends AsyncTask<Void,Void,Void> {
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             adapter.notifyDataSetChanged();
+            progressDialog.dismiss();
         }
 
         @Override
         protected void onPreExecute()
         {
             super.onPreExecute();
+            progressDialog=ProgressDialog.show(getContext(),null,null,true);
+            progressDialog.setContentView(R.layout.progress_dialog);
+            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            progressDialog.show();
         }
 
         @Override
@@ -92,6 +110,7 @@ public class NoticiasFragment extends Fragment
                     for(Noticia noticia: response.body())
                     {
                         noticias.add(noticia);
+
                          //Log.d(TAG,noticia.getTexto()+""+noticia.getTitulo()+" "+noticia.getFecha());
                     }
                     getActivity().runOnUiThread(new Runnable() {
@@ -108,6 +127,8 @@ public class NoticiasFragment extends Fragment
                 @Override
                 public void onFailure(Call<List<Noticia>> call, Throwable t) {
                     Log.d("Error",t.getMessage());
+                    Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                   // Snackbar.make(getActivity().findViewById(R.id.frm_noticia),t.getMessage(),Snackbar.LENGTH_SHORT).show();
                 }
             });
 

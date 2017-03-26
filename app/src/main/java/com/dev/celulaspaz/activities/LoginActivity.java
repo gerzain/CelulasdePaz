@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity
             {
                 accessToken=loginResult.getAccessToken();
                 Log.d(TAG,"OnSucces");
+                Snackbar.make(findViewById(R.id.rootview), "LogIn", Snackbar.LENGTH_LONG).show();
                 get_userInfo();
             }
 
