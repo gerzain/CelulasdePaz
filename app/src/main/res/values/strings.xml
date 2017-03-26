@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CelulasPaz</string>
+    <string name="title_noticias">Noticias</string>
+    <string name="title_descubre">Descubre</string>
+    <string name="title_hacer">¿Qué hacer?</string>
+    <string name="recompensas">Recompensas</string>
+    <string name="Logout">logout</string>
+    <string name="perfil">perfil</string>
+    <string name="nombre">nombre</string>
+</resources>
