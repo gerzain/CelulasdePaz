@@ -7,4 +7,6 @@
     <string name="Logout">logout</string>
     <string name="perfil">perfil</string>
     <string name="nombre">nombre</string>
+    <string name="recompensa">recompensa</string>
+    <string name="des_recompensa">rescompensa_des</string>
 </resources>
